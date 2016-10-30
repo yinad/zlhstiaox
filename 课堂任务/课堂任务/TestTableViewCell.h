@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  TestTableViewCell.h
 //  课堂任务1
 //
 //  Created by Adam on 2016/10/30.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface TestTableViewCell : UITableViewCell
 
 @end
-
