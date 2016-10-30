@@ -42,6 +42,11 @@
                     <constraint firstItem="fPt-eW-bjj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="vlF-7X-8nd"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="downloadLabel" destination="Z3W-3o-3J7" id="5CM-aI-NcI"/>
+                <outlet property="iconImageView" destination="fPt-eW-bjj" id="phR-4u-rwW"/>
+                <outlet property="nameLabel" destination="zlB-jB-xk1" id="ZVp-Ze-kV1"/>
+            </connections>
             <point key="canvasLocation" x="65.5" y="117"/>
         </tableViewCell>
     </objects>

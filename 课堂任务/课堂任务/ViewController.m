@@ -11,6 +11,8 @@
 #import "TestTableViewCell.h"
 #import "AFNTestModel.h"
 #import "AFNetworking.h"
+#import "UIImageView+WebCache.h"
+
 
 static NSString * CellID = @"CellID";
 
@@ -19,7 +21,7 @@ static NSString * CellID = @"CellID";
 
 @implementation ViewController{
     UITableView *_tableView;
-    NSArray *_dataArray;
+    NSArray<AFNTestModel *> *_dataArray;
 }
 
 - (void)viewDidLoad {
@@ -29,7 +31,6 @@ static NSString * CellID = @"CellID";
 }
 
 - (void)loadData{
-    _dataArray = [NSArray array];
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     [manager GET:@"https://raw.githubusercontent.com/yinad/zlhstiaox/master/apps.json" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -39,6 +40,7 @@ static NSString * CellID = @"CellID";
             [muArray addObject:model];
         }];
         _dataArray = muArray.copy;
+        [_tableView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
@@ -57,13 +59,15 @@ static NSString * CellID = @"CellID";
 
 #pragma mark - 数据源
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TestTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CellID" forIndexPath:indexPath];
+    cell.nameLabel.text = _dataArray[indexPath.row].name;
+    cell.downloadLabel.text = _dataArray[indexPath.row].download;
+    [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:_dataArray[indexPath.row].icon] placeholderImage:[UIImage imageNamed:@"user_default@2x"]];
 
-    
     return cell;
 }
 
